@@ -64,7 +64,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     globalTransform.pivot = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
     globalTransform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = GLOBAL_ROTATION.z, .w = 1};
     globalTransform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
-    globalTransform.translation = (ABCDVector3D){.x = 0, .y = 10, .z = 10, .w = 1};
+    globalTransform.translation = (ABCDVector3D){.x = 0, .y = 10, .z = 30, .w = 1};
     
     
     ABCDHexagon *hexagons = calloc(100, sizeof(ABCDHexagon));
@@ -80,7 +80,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
         transform->scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
         transform->translation = ABCDVector3DZero;
         
-        hexagons[n].transform.scale = (ABCDVector3D){.x = 3.8, .y = 1, .z = 1, .w = 1};
+        hexagons[n].transform.scale = (ABCDVector3D){.x = 3.89, .y = 1, .z = 1, .w = 1};
         hexagons[n].transform.translation = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
         hexagons[n].transform.rotation = (ABCDVector3D){.x = GLOBAL_ROTATION.x, .y = 0, .z = 0, .w = 1};
         hexagons[n].transform.pivot = ABCDVector3DZero;
@@ -96,6 +96,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
         
         cnt += localCnt;
         free(localFaces);
+        free(transform);
     }
 
     

@@ -42,9 +42,32 @@ void ABCDGetFacesFromHexagon(ABCDFace ** dst, size_t *count, const ABCDHexagon *
         face[n].transform.pivot = pivot;
         face[n].transform.rotation = rotation;
         face[n].transform.translation = translate;
-        face[n].transform.parent = &hex->transform;
+        face[n].transform.parent = NULL;
         face[n].id = n;
         
+        ABCDCalculateFace(&face[n], &face[n]);
+        
+        face[n].transform = hex->transform;
+        face[n].transform.parent = NULL;
+        
+        ABCDCalculateFace(&face[n], &face[n]);
+        
+//        scale = (ABCDVector3D){.x = 0.76, .y = 1, .z = 1, .w = 1};
+//        translate = (ABCDVector3D){.x = .12, .y = 1, .z = 1, .w = 1};
+        
+        
+        double coeff = (face[n].bl.y + 1) / 2;
+        ABCDMatrix4x4 scaleMatrix;
+        ABCDScaleMatrix(&scaleMatrix, 1 - 0.17 * coeff, 1, 1);
+        ABCDMultiplyMatrixToVector3D(&face[n].bl, &face[n].bl, &scaleMatrix);
+        ABCDMultiplyMatrixToVector3D(&face[n].br, &face[n].br, &scaleMatrix);
+        coeff = (face[n].tl.y + 1) / 2;
+        ABCDScaleMatrix(&scaleMatrix, 1 - 0.17 * coeff, 1, 1);
+        ABCDMultiplyMatrixToVector3D(&face[n].tl, &face[n].tl, &scaleMatrix);
+        ABCDMultiplyMatrixToVector3D(&face[n].tr, &face[n].tr, &scaleMatrix);
+
+        
+        face[n].transform = *hex->transform.parent;
         ABCDCalculateFace(&face[n], &face[n]);
     }
 }
