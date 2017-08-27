@@ -11,7 +11,7 @@
 #import "ABCDVector3D.h"
 #import "ABCDFace.h"
 
-static double ROTATION = 0.0;
+static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 
 @interface ABCDColorPickerView () {
     
@@ -29,7 +29,6 @@ static double ROTATION = 0.0;
 }
 
 - (void)redraw {
-    ROTATION += 1.0 * M_PI / 180.0;
     [self setNeedsDisplay];
 }
 
@@ -55,7 +54,7 @@ static double ROTATION = 0.0;
     for (int n = 0; n < 6; n++) {
         ABCDVector3D scale = {.x = 1, .y = 1, .z = 1, .w = 1};
         ABCDVector3D pivot = {.x = -0.5, .y = -0.5, .z = 0.866, .w = 1};
-        ABCDVector3D rotation = {.x = (double)n * 60.0 * M_PI / 180.0 + ROTATION, .y = 0, .z = 0, .w = 1};
+        ABCDVector3D rotation = {.x = (double)n * 60.0 * M_PI / 180.0 + GLOBAL_ROTATION.x, .y = GLOBAL_ROTATION.y, .z = GLOBAL_ROTATION.z, .w = 1};
         ABCDVector3D translate = {.x = 0, .y = 0, .z = 3, .w = 1};
         
         face[n].bl.x = 0;
@@ -139,5 +138,28 @@ static double ROTATION = 0.0;
     
     free(face);
     free(points);
+}
+
+- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    switch (touch.phase) {
+        case UITouchPhaseBegan:
+            return YES;
+        default:
+            return NO;
+    }
+}
+
+- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint p = [touch previousLocationInView:self];
+    CGPoint pp = [touch locationInView:self];
+    
+    GLOBAL_ROTATION.x += (pp.y - p.y) * M_PI / 180;
+    GLOBAL_ROTATION.y -= (pp.x - p.x) * M_PI / 180;
+    
+    return YES;
+}
+
+- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super endTrackingWithTouch:touch withEvent:event];
 }
 @end
