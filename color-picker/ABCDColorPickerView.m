@@ -130,13 +130,13 @@
         // TODO: needs refactoring
 
         double h, s, b;
-        h = (double)face[n].id / (double)100 / 30;
+        h = (double)(face[n].id / 100) / 28;
         if (face[n].id % 10 >= 3) {
-            b = 1.0;
-            s = 1.0 - (double)(face[n].id % 10 - 3) / 3.0;
+            b = h > 1 ? (double)(face[n].id % 10) / 5 : 1.0;
+            s = h > 1 ? 0 : 1.0 - (double)(face[n].id % 10 - 3) / 3.0;
         } else {
-            s = 1;
-            b = MAX((double)(face[n].id % 10) / 3.0, 0.2);
+            s = h > 1 ? 0 : 1;
+            b = h > 1 ? (double)(face[n].id % 10) / 5 : MAX((double)(face[n].id % 10) / 3.0, 0.2);
         }
         
         
@@ -151,25 +151,25 @@
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGRect aRect = CGRectMake(0, 0, 100, 100);
+    CGRect aRect = CGRectMake(0, 0, 10, 10);
     
     // TODO: needs refactoring
     double h, s, b;
-    h = fmod(360 - overallRotation.z, 360) / 360;
-    while (h < 0) {
-        h += 1;
+    double z = fmod(360 - overallRotation.z + 6, 360);
+    while (z < 0) {
+        z += 360;
     }
-    
+    h = z / 348;
     double x = fmod(round((-overallRotation.x + 180) / 60), 6);
     while (x < 0) {
         x += 6;
     }
     if (x > 3) {
-        b = 1.0;
-        s = 1.0 - (double)(x - 3) / 3.0;
+        b = h > 1 ? x / 5 : 1.0;
+        s = h > 1 ? 0 : 1.0 - (x - 3) / 3.0;
     } else {
-        s = 1;
-        b = MAX((double)(x) / 3.0, 0.2);
+        s = h > 1 ? 0 : 1;
+        b = h > 1 ? x / 5 : MAX((x) / 3.0, 0.2);
     }
     
     [[UIColor colorWithHue:h saturation:s brightness:b alpha:1] setFill];
