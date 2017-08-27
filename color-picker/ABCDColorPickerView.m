@@ -35,7 +35,7 @@ static double ROTATION = 0.0;
 - (void)drawRect:(CGRect)rect {
     for (int n = 0; n < 6; n++) {
         ABCDMatrix4x4 pivotMatrix, rotationMatrix, translateMatrix;
-        ABCDTranslationMatrix(&pivotMatrix, -0.5, -0.5, 1);
+        ABCDTranslationMatrix(&pivotMatrix, -0.5, -0.5, 0.866);
         ABCDRotationXMatrix(&rotationMatrix, (double)n * 60 * M_PI / 180 + ROTATION);
         ABCDTranslationMatrix(&translateMatrix, 0, 0, 3);
         
