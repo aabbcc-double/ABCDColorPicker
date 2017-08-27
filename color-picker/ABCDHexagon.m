@@ -15,7 +15,7 @@ void ABCDGetFacesFromHexagon(ABCDFace ** dst, size_t *count, const ABCDHexagon *
     for (int n = 0; n < 6; n++) {
         ABCDVector3D scale = {.x = 1, .y = 1, .z = 1, .w = 1};
         ABCDVector3D pivot = {.x = -0.5, .y = -0.5, .z = 0.866, .w = 1};
-        ABCDVector3D rotation = {.x = (double)n * 60.0 * M_PI / 180.0, .y = 0, .z = 0, .w = 1};
+        ABCDVector3D rotation = {.x = (double)n * 60.0, .y = 0, .z = 0, .w = 1};
         ABCDVector3D translate = {.x = 0, .y = 0, .z = 0, .w = 1};
         
         face[n].bl.x = 0;

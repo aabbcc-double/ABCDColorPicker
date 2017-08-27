@@ -13,10 +13,8 @@
 #import "ABCDHexagon.h"
 #import "ABCDTransformation.h"
 
-static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
-
 @interface ABCDColorPickerView () {
-    
+    ABCDVector3D overallRotation;
 }
 @end
 
@@ -32,10 +30,9 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 
 - (void)redraw {
     if ([self isTracking] == NO) {
-//        GLOBAL_ROTATION.x = GLOBAL_ROTATION.x * 180 / M_PI;
-//        GLOBAL_ROTATION.x += (fmod(GLOBAL_ROTATION.x, 60) - GLOBAL_ROTATION.x) / 10;
-        GLOBAL_ROTATION.y += (0 - GLOBAL_ROTATION.y) / 10;
-//        GLOBAL_ROTATION.x = GLOBAL_ROTATION.x * M_PI / 180;
+        
+        overallRotation.x += ((overallRotation.x - fmod(overallRotation.x, 60)) - overallRotation.x) / 10;
+        overallRotation.z += ((overallRotation.z - fmod(overallRotation.z, 20)) - overallRotation.z) / 10;
     }
     
     [self setNeedsDisplay];
@@ -62,7 +59,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     ABCDTransformation globalTransform;
     globalTransform.parent = NULL;
     globalTransform.pivot = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
-    globalTransform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = GLOBAL_ROTATION.z, .w = 1};
+    globalTransform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = overallRotation.z, .w = 1};
     globalTransform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
     globalTransform.translation = (ABCDVector3D){.x = 0, .y = 10, .z = 30, .w = 1};
     
@@ -72,17 +69,16 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     size_t cnt = 0;
     
     for (int n = 0; n < 18; n++) {
-        // TODO: memory leak
         ABCDTransformation *transform = calloc(1, sizeof(ABCDTransformation));
         transform->parent = &globalTransform;
         transform->pivot = (ABCDVector3D){.x = 0, .y = -10, .z = 0, .w = 1};
-        transform->rotation = (ABCDVector3D){.x = 0, .y = 0, .z = (double)n * 20 * M_PI / 180, .w = 1};
+        transform->rotation = (ABCDVector3D){.x = 0, .y = 0, .z = (double)n * 20, .w = 1};
         transform->scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
         transform->translation = ABCDVector3DZero;
         
         hexagons[n].transform.scale = (ABCDVector3D){.x = 3.89, .y = 1, .z = 1, .w = 1};
         hexagons[n].transform.translation = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
-        hexagons[n].transform.rotation = (ABCDVector3D){.x = GLOBAL_ROTATION.x, .y = 0, .z = 0, .w = 1};
+        hexagons[n].transform.rotation = (ABCDVector3D){.x = overallRotation.x, .y = 0, .z = 0, .w = 1};
         hexagons[n].transform.pivot = ABCDVector3DZero;
         hexagons[n].transform.parent = transform;
         
@@ -92,6 +88,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
         
         for (size_t i = 0; i < localCnt; i++) {
             face[cnt + i] = localFaces[i];
+            face[cnt + i].id = n * 100 + i;
         }
         
         cnt += localCnt;
@@ -128,21 +125,13 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
         points[4] = points[0];
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[UIColor blackColor] setStroke];
-        switch (face[n].id % 3) {
-            case 0:
-                [[[UIColor blueColor] colorWithAlphaComponent:1] setFill];
-                break;
-            case 1:
-                [[[UIColor greenColor] colorWithAlphaComponent:1] setFill];
-                break;
-            case 2:
-                [[[UIColor orangeColor] colorWithAlphaComponent:1] setFill];
-                break;
-            default:
-                break;
-        }
-        CGContextSetLineWidth(context, 1);
+        [[UIColor whiteColor] setStroke];
+        
+        
+        double h = (double)face[n].id / (double)100;
+        [[UIColor colorWithHue:h / 18 saturation:(double)(face[n].id % 10) / 6 brightness:1 alpha:1] setFill];
+        
+        CGContextSetLineWidth(context, 0.3);
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetLineJoin(context, kCGLineJoinRound);
         CGContextAddLines(context, points, 5);
@@ -167,8 +156,11 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     CGPoint p = [touch previousLocationInView:self];
     CGPoint pp = [touch locationInView:self];
     
-    GLOBAL_ROTATION.x += (pp.y - p.y) * M_PI / 180;
-    GLOBAL_ROTATION.z += (pp.x - p.x) * M_PI / 180;
+    overallRotation.x += pp.y - p.y;
+    overallRotation.z += pp.x - p.x;
+    
+    overallRotation.x = fmod(overallRotation.x, 360);
+//    overallRotation.y = fmod(overallRotation.y, 360);
     
     return YES;
 }

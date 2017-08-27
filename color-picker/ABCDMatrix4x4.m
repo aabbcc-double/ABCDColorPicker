@@ -144,9 +144,9 @@ void ABCDRotationMatrix(ABCDMatrix4x4 * restrict m, double x, double y, double z
     ABCDMatrix4x4 rotation = ABCDMatrix4x4Identity;
     
     ABCDMatrix4x4 rotX, rotY, rotZ;
-    ABCDRotationXMatrix(&rotX, x);
-    ABCDRotationYMatrix(&rotY, y);
-    ABCDRotationZMatrix(&rotZ, z);
+    ABCDRotationXMatrix(&rotX, x * M_PI / 180);
+    ABCDRotationYMatrix(&rotY, y * M_PI / 180);
+    ABCDRotationZMatrix(&rotZ, z * M_PI / 180);
     
     ABCDMultiplyMatrixToMatrix(&rotation, &rotation, &rotZ);
     ABCDMultiplyMatrixToMatrix(&rotation, &rotation, &rotY);
