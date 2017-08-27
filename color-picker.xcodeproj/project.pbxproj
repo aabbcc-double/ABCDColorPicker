@@ -13,7 +13,12 @@
 		BA71BC451F4ECC94009A7BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA71BC441F4ECC94009A7BBB /* Assets.xcassets */; };
 		BA71BC481F4ECC94009A7BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA71BC461F4ECC94009A7BBB /* LaunchScreen.storyboard */; };
 		BA71BC4B1F4ECC94009A7BBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC4A1F4ECC94009A7BBB /* main.m */; };
-		BA71BC531F4ECCA7009A7BBB /* ColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC521F4ECCA7009A7BBB /* ColorPickerView.m */; };
+		BA71BC531F4ECCA7009A7BBB /* ABCDColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */; };
+		BA71BC561F51A6B7009A7BBB /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */; };
+		BA71BC611F51B9F5009A7BBB /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */; };
+		BA71BC641F51C139009A7BBB /* ABCDCube.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC631F51C139009A7BBB /* ABCDCube.m */; };
+		BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC791F51CD34009A7BBB /* matrixTests.m */; };
+		BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,12 +32,28 @@
 		BA71BC471F4ECC94009A7BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA71BC491F4ECC94009A7BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA71BC4A1F4ECC94009A7BBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BA71BC511F4ECCA7009A7BBB /* ColorPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorPickerView.h; sourceTree = "<group>"; };
-		BA71BC521F4ECCA7009A7BBB /* ColorPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorPickerView.m; sourceTree = "<group>"; };
+		BA71BC511F4ECCA7009A7BBB /* ABCDColorPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDColorPickerView.h; sourceTree = "<group>"; };
+		BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDColorPickerView.m; sourceTree = "<group>"; };
+		BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDMatrix4x4.m; sourceTree = "<group>"; };
+		BA71BC551F51A6B7009A7BBB /* ABCDMatrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDMatrix4x4.h; sourceTree = "<group>"; };
+		BA71BC5F1F51B9F5009A7BBB /* ABCDVector3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDVector3D.h; sourceTree = "<group>"; };
+		BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDVector3D.m; sourceTree = "<group>"; };
+		BA71BC621F51C139009A7BBB /* ABCDCube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDCube.h; sourceTree = "<group>"; };
+		BA71BC631F51C139009A7BBB /* ABCDCube.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDCube.m; sourceTree = "<group>"; };
+		BA71BC771F51CD34009A7BBB /* matrixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = matrixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA71BC791F51CD34009A7BBB /* matrixTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = matrixTests.m; sourceTree = "<group>"; };
+		BA71BC7B1F51CD34009A7BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BA71BC351F4ECC94009A7BBB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA71BC741F51CD34009A7BBB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				BA71BC3A1F4ECC94009A7BBB /* color-picker */,
+				BA71BC781F51CD34009A7BBB /* matrixTests */,
 				BA71BC391F4ECC94009A7BBB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				BA71BC381F4ECC94009A7BBB /* color-picker.app */,
+				BA71BC771F51CD34009A7BBB /* matrixTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,10 +93,25 @@
 				BA71BC461F4ECC94009A7BBB /* LaunchScreen.storyboard */,
 				BA71BC491F4ECC94009A7BBB /* Info.plist */,
 				BA71BC4A1F4ECC94009A7BBB /* main.m */,
-				BA71BC511F4ECCA7009A7BBB /* ColorPickerView.h */,
-				BA71BC521F4ECCA7009A7BBB /* ColorPickerView.m */,
+				BA71BC511F4ECCA7009A7BBB /* ABCDColorPickerView.h */,
+				BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */,
+				BA71BC551F51A6B7009A7BBB /* ABCDMatrix4x4.h */,
+				BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */,
+				BA71BC5F1F51B9F5009A7BBB /* ABCDVector3D.h */,
+				BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */,
+				BA71BC621F51C139009A7BBB /* ABCDCube.h */,
+				BA71BC631F51C139009A7BBB /* ABCDCube.m */,
 			);
 			path = "color-picker";
+			sourceTree = "<group>";
+		};
+		BA71BC781F51CD34009A7BBB /* matrixTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA71BC791F51CD34009A7BBB /* matrixTests.m */,
+				BA71BC7B1F51CD34009A7BBB /* Info.plist */,
+			);
+			path = matrixTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +134,23 @@
 			productReference = BA71BC381F4ECC94009A7BBB /* color-picker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BA71BC761F51CD34009A7BBB /* matrixTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA71BC7C1F51CD35009A7BBB /* Build configuration list for PBXNativeTarget "matrixTests" */;
+			buildPhases = (
+				BA71BC731F51CD34009A7BBB /* Sources */,
+				BA71BC741F51CD34009A7BBB /* Frameworks */,
+				BA71BC751F51CD34009A7BBB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = matrixTests;
+			productName = matrixTests;
+			productReference = BA71BC771F51CD34009A7BBB /* matrixTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -106,6 +161,9 @@
 				ORGANIZATIONNAME = "Shakhzod Ikromov";
 				TargetAttributes = {
 					BA71BC371F4ECC94009A7BBB = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					BA71BC761F51CD34009A7BBB = {
 						CreatedOnToolsVersion = 9.0;
 					};
 				};
@@ -124,6 +182,7 @@
 			projectRoot = "";
 			targets = (
 				BA71BC371F4ECC94009A7BBB /* color-picker */,
+				BA71BC761F51CD34009A7BBB /* matrixTests */,
 			);
 		};
 /* End PBXProject section */
@@ -139,6 +198,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BA71BC751F51CD34009A7BBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -146,10 +212,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA71BC531F4ECCA7009A7BBB /* ColorPickerView.m in Sources */,
+				BA71BC531F4ECCA7009A7BBB /* ABCDColorPickerView.m in Sources */,
+				BA71BC611F51B9F5009A7BBB /* ABCDVector3D.m in Sources */,
 				BA71BC401F4ECC94009A7BBB /* ViewController.m in Sources */,
 				BA71BC4B1F4ECC94009A7BBB /* main.m in Sources */,
 				BA71BC3D1F4ECC94009A7BBB /* AppDelegate.m in Sources */,
+				BA71BC641F51C139009A7BBB /* ABCDCube.m in Sources */,
+				BA71BC561F51A6B7009A7BBB /* ABCDMatrix4x4.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA71BC731F51CD34009A7BBB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */,
+				BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +385,34 @@
 			};
 			name = Release;
 		};
+		BA71BC7D1F51CD35009A7BBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = matrixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = uz.aabbccdouble.matrixTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BA71BC7E1F51CD35009A7BBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = matrixTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = uz.aabbccdouble.matrixTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -324,6 +430,15 @@
 			buildConfigurations = (
 				BA71BC4F1F4ECC94009A7BBB /* Debug */,
 				BA71BC501F4ECC94009A7BBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA71BC7C1F51CD35009A7BBB /* Build configuration list for PBXNativeTarget "matrixTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA71BC7D1F51CD35009A7BBB /* Debug */,
+				BA71BC7E1F51CD35009A7BBB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

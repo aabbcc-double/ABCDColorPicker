@@ -1,5 +1,5 @@
 //
-//  ColorPickerView.h
+//  ABCDColorPickerView.h
 //  color-picker
 //
 //  Created by Shakhzod Ikromov on 8/24/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ColorPickerView : UIControl
+@interface ABCDColorPickerView : UIControl
 
 @end
