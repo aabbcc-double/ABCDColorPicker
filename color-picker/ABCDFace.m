@@ -17,10 +17,7 @@ void ABCDCopyFaceToFace(ABCDFace * restrict dst, const ABCDFace * restrict src) 
     dst->tr = src->tr;
     dst->br = src->br;
     
-    dst->scale = src->scale;
-    dst->pivotPoint = src->pivotPoint;
-    dst->rotation = src->rotation;
-    dst->translation = src->translation;
+    dst->transform = src->transform;
     
     dst->avarageZ = src->avarageZ;
 }
@@ -31,10 +28,10 @@ void ABCDCalculateFace(ABCDFace * restrict dst, const ABCDFace * restrict src) {
     ABCDFace *tmp = &temp;
     
     ABCDMatrix4x4 scaleMatrix, pivotTranslateMatrix, rotationMatrix, translateMatrix;
-    ABCDScaleMatrix(&scaleMatrix, src->scale.x, src->scale.y, src->scale.y);
-    ABCDTranslationMatrix(&pivotTranslateMatrix, src->pivotPoint.x, src->pivotPoint.y, src->pivotPoint.z);
-    ABCDRotationMatrix(&rotationMatrix, src->rotation.x, src->rotation.y, src->rotation.z);
-    ABCDTranslationMatrix(&translateMatrix, src->translation.x, src->translation.y, src->translation.z);
+    ABCDScaleMatrix(&scaleMatrix, src->transform.scale.x, src->transform.scale.y, src->transform.scale.y);
+    ABCDTranslationMatrix(&pivotTranslateMatrix, src->transform.pivot.x, src->transform.pivot.y, src->transform.pivot.z);
+    ABCDRotationMatrix(&rotationMatrix, src->transform.rotation.x, src->transform.rotation.y, src->transform.rotation.z);
+    ABCDTranslationMatrix(&translateMatrix, src->transform.translation.x, src->transform.translation.y, src->transform.translation.z);
     
     ABCDMultiplyMatrixToVector3D(&tmp->bl, &src->bl, &scaleMatrix);
     ABCDMultiplyMatrixToVector3D(&tmp->bl, &tmp->bl, &pivotTranslateMatrix);
@@ -57,11 +54,18 @@ void ABCDCalculateFace(ABCDFace * restrict dst, const ABCDFace * restrict src) {
     ABCDMultiplyMatrixToVector3D(&tmp->br, &tmp->br, &translateMatrix);
     
     tmp->avarageZ = (tmp->bl.z + tmp->br.z + tmp->tr.z + tmp->tl.z) / 4.0;
-    tmp->scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
-    tmp->pivotPoint = ABCDVector3DZero;
-    tmp->rotation = ABCDVector3DZero;
-    tmp->translation = ABCDVector3DZero;
     tmp->id = src->id;
+    
+    if (src->transform.parent != NULL) {
+        tmp->transform = *src->transform.parent;
+        ABCDCalculateFace(tmp, tmp);
+    } else {
+        tmp->transform.parent = NULL;
+        tmp->transform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
+        tmp->transform.pivot = ABCDVector3DZero;
+        tmp->transform.rotation = ABCDVector3DZero;
+        tmp->transform.translation = ABCDVector3DZero;
+    }
     
     ABCDCopyFaceToFace(dst, tmp);
 }

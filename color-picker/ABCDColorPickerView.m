@@ -10,6 +10,8 @@
 #import "ABCDMatrix4x4.h"
 #import "ABCDVector3D.h"
 #import "ABCDFace.h"
+#import "ABCDHexagon.h"
+#import "ABCDTransformation.h"
 
 static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 
@@ -57,43 +59,24 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 }
 
 - (void)drawRect:(CGRect)rect {
-    ABCDFace *face = calloc(6, sizeof(ABCDFace));
-    for (int n = 0; n < 6; n++) {
-        ABCDVector3D scale = {.x = 1, .y = 1, .z = 1, .w = 1};
-        ABCDVector3D pivot = {.x = -0.5, .y = -0.5, .z = 0.866, .w = 1};
-        ABCDVector3D rotation = {.x = (double)n * 60.0 * M_PI / 180.0 + GLOBAL_ROTATION.x, .y = GLOBAL_ROTATION.y, .z = GLOBAL_ROTATION.z, .w = 1};
-        ABCDVector3D translate = {.x = 0, .y = 0, .z = 3, .w = 1};
-        
-        face[n].bl.x = 0;
-        face[n].bl.y = 0;
-        face[n].bl.z = 0;
-        face[n].bl.w = 1;
-        
-        face[n].tl.x = 0;
-        face[n].tl.y = 1;
-        face[n].tl.z = 0;
-        face[n].tl.w = 1;
-        
-        face[n].tr.x = 1;
-        face[n].tr.y = 1;
-        face[n].tr.z = 0;
-        face[n].tr.w = 1;
-        
-        face[n].br.x = 1;
-        face[n].br.y = 0;
-        face[n].br.z = 0;
-        face[n].br.w = 1;
-        
-        face[n].scale = scale;
-        face[n].pivotPoint = pivot;
-        face[n].rotation = rotation;
-        face[n].translation = translate;
-        face[n].id = n;
-        
-        ABCDCalculateFace(&face[n], &face[n]);
-    }
+    ABCDTransformation transform;
+    transform.parent = NULL;
+    transform.pivot = (ABCDVector3D){.x = 0, .y = -5, .z = 0, .w = 1};
+    transform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = GLOBAL_ROTATION.z, .w = 1};
+    transform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
+    transform.translation = (ABCDVector3D){.x = 0, .y = 5, .z = 0, .w = 1};
     
-    [self sortFacesByAvarageZ:face count:6];
+    ABCDHexagon hexagon;
+    hexagon.transform.scale = (ABCDVector3D){.x = 3, .y = 1, .z = 1, .w = 1};
+    hexagon.transform.translation = (ABCDVector3D){.x = 0, .y = 0, .z = 20, .w = 1};
+    hexagon.transform.rotation = (ABCDVector3D){.x = GLOBAL_ROTATION.x, .y = 0, .z = 0, .w = 1};
+    hexagon.transform.pivot = ABCDVector3DZero;
+    hexagon.transform.parent = &transform;
+    
+    ABCDFace *face = calloc(100, sizeof(ABCDFace));
+    size_t cnt;
+    ABCDGetFacesFromHexagon(&face, &cnt, &hexagon);
+    [self sortFacesByAvarageZ:face count:cnt];
     
     CGPoint *points = calloc(5, sizeof(CGPoint));
     for (int n = 0; n < 6; n++) {
@@ -122,21 +105,21 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
         points[4] = points[0];
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[UIColor redColor] setStroke];
+        [[UIColor blackColor] setStroke];
         switch (face[n].id % 3) {
             case 0:
-                [[[UIColor blueColor] colorWithAlphaComponent:0.7] setFill];
+                [[[UIColor blueColor] colorWithAlphaComponent:1] setFill];
                 break;
             case 1:
-                [[[UIColor greenColor] colorWithAlphaComponent:0.7] setFill];
+                [[[UIColor greenColor] colorWithAlphaComponent:1] setFill];
                 break;
             case 2:
-                [[[UIColor orangeColor] colorWithAlphaComponent:0.7] setFill];
+                [[[UIColor orangeColor] colorWithAlphaComponent:1] setFill];
                 break;
             default:
                 break;
         }
-        CGContextSetLineWidth(context, 5);
+        CGContextSetLineWidth(context, 1);
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetLineJoin(context, kCGLineJoinRound);
         CGContextAddLines(context, points, 5);
@@ -161,7 +144,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     CGPoint pp = [touch locationInView:self];
     
     GLOBAL_ROTATION.x += (pp.y - p.y) * M_PI / 180;
-    GLOBAL_ROTATION.y -= (pp.x - p.x) * M_PI / 180;
+    GLOBAL_ROTATION.z += (pp.x - p.x) * M_PI / 180;
     
     return YES;
 }

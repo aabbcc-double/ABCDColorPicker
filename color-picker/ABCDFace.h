@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ABCDVector3D.h"
+#import "ABCDTransformation.h"
 
 struct ABCDFace {
     uint64_t id;
@@ -17,10 +18,7 @@ struct ABCDFace {
     ABCDVector3D tr;
     ABCDVector3D br;
     
-    ABCDVector3D scale;
-    ABCDVector3D rotation;
-    ABCDVector3D pivotPoint;
-    ABCDVector3D translation;
+    ABCDTransformation transform;
     
     double avarageZ;
 };
