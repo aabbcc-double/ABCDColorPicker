@@ -19,6 +19,9 @@
 		BA71BC641F51C139009A7BBB /* ABCDCube.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC631F51C139009A7BBB /* ABCDCube.m */; };
 		BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC791F51CD34009A7BBB /* matrixTests.m */; };
 		BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */; };
+		BA71BC821F52D5CB009A7BBB /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC811F52D5CB009A7BBB /* ABCDFace.m */; };
+		BA71BC831F52F3F9009A7BBB /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */; };
+		BA71BC841F52F3FE009A7BBB /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC811F52D5CB009A7BBB /* ABCDFace.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,8 @@
 		BA71BC771F51CD34009A7BBB /* matrixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = matrixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA71BC791F51CD34009A7BBB /* matrixTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = matrixTests.m; sourceTree = "<group>"; };
 		BA71BC7B1F51CD34009A7BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA71BC801F52D5CB009A7BBB /* ABCDFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDFace.h; sourceTree = "<group>"; };
+		BA71BC811F52D5CB009A7BBB /* ABCDFace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDFace.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +104,8 @@
 				BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */,
 				BA71BC5F1F51B9F5009A7BBB /* ABCDVector3D.h */,
 				BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */,
+				BA71BC801F52D5CB009A7BBB /* ABCDFace.h */,
+				BA71BC811F52D5CB009A7BBB /* ABCDFace.m */,
 				BA71BC621F51C139009A7BBB /* ABCDCube.h */,
 				BA71BC631F51C139009A7BBB /* ABCDCube.m */,
 			);
@@ -218,6 +225,7 @@
 				BA71BC4B1F4ECC94009A7BBB /* main.m in Sources */,
 				BA71BC3D1F4ECC94009A7BBB /* AppDelegate.m in Sources */,
 				BA71BC641F51C139009A7BBB /* ABCDCube.m in Sources */,
+				BA71BC821F52D5CB009A7BBB /* ABCDFace.m in Sources */,
 				BA71BC561F51A6B7009A7BBB /* ABCDMatrix4x4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +235,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */,
+				BA71BC831F52F3F9009A7BBB /* ABCDVector3D.m in Sources */,
+				BA71BC841F52F3FE009A7BBB /* ABCDFace.m in Sources */,
 				BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

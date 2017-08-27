@@ -8,25 +8,51 @@
 
 #import "ABCDVector3D.h"
 
-void ABCDNormalizeVector3D(ABCDVector3D * restrict vector) {
-    if (vector->w == 0) return;
-    
-    vector->x /= vector->w;
-    vector->y /= vector->w;
-    vector->z /= vector->w;
-    vector->w = 1.0;
+const ABCDVector3D ABCDVector3DZero = {
+    .x = 0,
+    .y = 0,
+    .z = 0,
+    .w = 1
+};
+
+void ABCDCopyVector3DToVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src) {
+    dst->x = src->x;
+    dst->y = src->y;
+    dst->z = src->z;
+    dst->w = src->w;
 }
 
-void ABCDMultiplyMatrixToVector3D(const ABCDMatrix4x4 * restrict m, ABCDVector3D * restrict v) {
-    ABCDNormalizeVector3D(v);
+void ABCDNormalizeVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src) {
     double ax, ay, az, aw;
-    ax = m->m11 * v->x + m->m12 * v->y + m->m13 * v->z + m->m14 * v->w;
-    ay = m->m21 * v->x + m->m22 * v->y + m->m23 * v->z + m->m24 * v->w;
-    az = m->m31 * v->x + m->m32 * v->y + m->m33 * v->z + m->m34 * v->w;
-    aw = m->m41 * v->x + m->m42 * v->y + m->m43 * v->z + m->m44 * v->w;
     
-    v->x = ax;
-    v->y = ay;
-    v->z = az;
-    v->w = aw;
+    ax = src->x;
+    ay = src->y;
+    az = src->z;
+    aw = src->w;
+    if (src->w != 0) {
+        ax /= aw;
+        ay /= aw;
+        az /= aw;
+        aw = 1.0;
+    }
+    
+    dst->x = ax;
+    dst->y = ay;
+    dst->z = az;
+    dst->w = aw;
+}
+
+void ABCDMultiplyMatrixToVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src, const ABCDMatrix4x4 * restrict m) {
+    ABCDVector3D tmp;
+    ABCDNormalizeVector3D(&tmp, src);
+    double ax, ay, az, aw;
+    ax = m->m11 * tmp.x + m->m12 * tmp.y + m->m13 * tmp.z + m->m14 * tmp.w;
+    ay = m->m21 * tmp.x + m->m22 * tmp.y + m->m23 * tmp.z + m->m24 * tmp.w;
+    az = m->m31 * tmp.x + m->m32 * tmp.y + m->m33 * tmp.z + m->m34 * tmp.w;
+    aw = m->m41 * tmp.x + m->m42 * tmp.y + m->m43 * tmp.z + m->m44 * tmp.w;
+    
+    dst->x = ax;
+    dst->y = ay;
+    dst->z = az;
+    dst->w = aw;
 };

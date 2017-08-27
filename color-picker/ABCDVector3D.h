@@ -18,5 +18,8 @@ struct ABCDVector3D {
 
 typedef struct ABCDVector3D ABCDVector3D;
 
-void ABCDNormalizeVector3D(ABCDVector3D * restrict);
-void ABCDMultiplyMatrixToVector3D(const ABCDMatrix4x4 * restrict, ABCDVector3D * restrict);
+extern const ABCDVector3D ABCDVector3DZero;
+
+void ABCDCopyVector3DToVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src);
+void ABCDNormalizeVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src);
+void ABCDMultiplyMatrixToVector3D(ABCDVector3D * restrict dst, const ABCDVector3D * restrict src, const ABCDMatrix4x4 * restrict matrix);

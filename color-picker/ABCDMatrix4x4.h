@@ -29,8 +29,14 @@ struct ABCDMatrix4x4 {
 
 typedef struct ABCDMatrix4x4 ABCDMatrix4x4;
 
+extern const ABCDMatrix4x4 ABCDMatrix4x4Identity;
+
 void ABCDPerspectiveProjectionMatrix(ABCDMatrix4x4 * restrict m, double near, double far);
 void ABCDRotationXMatrix(ABCDMatrix4x4 * restrict m, double radians);
+void ABCDRotationYMatrix(ABCDMatrix4x4 * restrict m, double radians);
+void ABCDRotationZMatrix(ABCDMatrix4x4 * restrict m, double radians);
+void ABCDRotationMatrix(ABCDMatrix4x4 * restrict m, double x, double y, double z);
 void ABCDTranslationMatrix(ABCDMatrix4x4 * restrict m, double tX, double tY, double tZ);
 void ABCDScaleMatrix(ABCDMatrix4x4 * restrict m, double xScale, double yScale, double zScale);
+void ABCDCopyMatrixToMatrix(ABCDMatrix4x4 * restrict dst, const ABCDMatrix4x4 * restrict src);
 void ABCDMultiplyMatrixToMatrix(ABCDMatrix4x4 * restrict result, const ABCDMatrix4x4 * restrict a, const ABCDMatrix4x4 * restrict b);

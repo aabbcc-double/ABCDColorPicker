@@ -9,6 +9,7 @@
 #import "ABCDColorPickerView.h"
 #import "ABCDMatrix4x4.h"
 #import "ABCDVector3D.h"
+#import "ABCDFace.h"
 
 static double ROTATION = 0.0;
 
@@ -28,90 +29,115 @@ static double ROTATION = 0.0;
 }
 
 - (void)redraw {
-    ROTATION += 1 * M_PI / 180;
+    ROTATION += 1.0 * M_PI / 180.0;
     [self setNeedsDisplay];
 }
 
+- (void)sortFacesByAvarageZ:(ABCDFace *)faces count:(size_t)count {
+    // buble sort
+    int swapped;
+    do {
+        swapped = 0;
+        for (int n = 1; n < count; n++) {
+            if (faces[n - 1].avarageZ < faces[n].avarageZ) {
+                ABCDFace tmp;
+                ABCDCopyFaceToFace(&tmp, &faces[n - 1]);
+                ABCDCopyFaceToFace(&faces[n - 1] , &faces[n]);
+                ABCDCopyFaceToFace(&faces[n], &tmp);
+                swapped = 1;
+            }
+        }
+    } while (swapped == 1);
+}
+
 - (void)drawRect:(CGRect)rect {
+    ABCDFace *face = calloc(6, sizeof(ABCDFace));
     for (int n = 0; n < 6; n++) {
-        ABCDMatrix4x4 pivotMatrix, rotationMatrix, translateMatrix;
-        ABCDTranslationMatrix(&pivotMatrix, -0.5, -0.5, 0.866);
-        ABCDRotationXMatrix(&rotationMatrix, (double)n * 60 * M_PI / 180 + ROTATION);
-        ABCDTranslationMatrix(&translateMatrix, 0, 0, 3);
+        ABCDVector3D scale = {.x = 1, .y = 1, .z = 1, .w = 1};
+        ABCDVector3D pivot = {.x = -0.5, .y = -0.5, .z = 0.866, .w = 1};
+        ABCDVector3D rotation = {.x = (double)n * 60.0 * M_PI / 180.0 + ROTATION, .y = 0, .z = 0, .w = 1};
+        ABCDVector3D translate = {.x = 0, .y = 0, .z = 3, .w = 1};
         
-        ABCDVector3D *side = calloc(20, sizeof(ABCDVector3D));
-        side[0].x = 0;
-        side[0].y = 0;
-        side[0].z = 0;
-        side[0].w = 1;
-        ABCDMultiplyMatrixToVector3D(&pivotMatrix, &side[0]);
-        ABCDMultiplyMatrixToVector3D(&rotationMatrix, &side[0]);
-        ABCDMultiplyMatrixToVector3D(&translateMatrix, &side[0]);
+        face[n].bl.x = 0;
+        face[n].bl.y = 0;
+        face[n].bl.z = 0;
+        face[n].bl.w = 1;
         
-        side[1].x = 0;
-        side[1].y = 1;
-        side[1].z = 0;
-        side[1].w = 1;
-        ABCDMultiplyMatrixToVector3D(&pivotMatrix, &side[1]);
-        ABCDMultiplyMatrixToVector3D(&rotationMatrix, &side[1]);
-        ABCDMultiplyMatrixToVector3D(&translateMatrix, &side[1]);
-
+        face[n].tl.x = 0;
+        face[n].tl.y = 1;
+        face[n].tl.z = 0;
+        face[n].tl.w = 1;
         
-        side[2].x = 1;
-        side[2].y = 1;
-        side[2].z = 0;
-        side[2].w = 1;
-        ABCDMultiplyMatrixToVector3D(&pivotMatrix, &side[2]);
-        ABCDMultiplyMatrixToVector3D(&rotationMatrix, &side[2]);
-        ABCDMultiplyMatrixToVector3D(&translateMatrix, &side[2]);
-
+        face[n].tr.x = 1;
+        face[n].tr.y = 1;
+        face[n].tr.z = 0;
+        face[n].tr.w = 1;
         
-        side[3].x = 1;
-        side[3].y = 0;
-        side[3].z = 0;
-        side[3].w = 1;
-        ABCDMultiplyMatrixToVector3D(&pivotMatrix, &side[3]);
-        ABCDMultiplyMatrixToVector3D(&rotationMatrix, &side[3]);
-        ABCDMultiplyMatrixToVector3D(&translateMatrix, &side[3]);
-
+        face[n].br.x = 1;
+        face[n].br.y = 0;
+        face[n].br.z = 0;
+        face[n].br.w = 1;
         
-        ABCDMatrix4x4 projectionMatrix;
-        ABCDPerspectiveProjectionMatrix(&projectionMatrix, 1, 20);
-        ABCDMultiplyMatrixToVector3D(&projectionMatrix, &side[0]);
-        ABCDMultiplyMatrixToVector3D(&projectionMatrix, &side[1]);
-        ABCDMultiplyMatrixToVector3D(&projectionMatrix, &side[2]);
-        ABCDMultiplyMatrixToVector3D(&projectionMatrix, &side[3]);
+        face[n].scale = scale;
+        face[n].pivotPoint = pivot;
+        face[n].rotation = rotation;
+        face[n].translation = translate;
+        face[n].id = n;
         
-        CGFloat avarageLength = (CGRectGetWidth(self.bounds) + CGRectGetHeight(self.bounds)) / 2;
+        ABCDCalculateFace(&face[n], &face[n]);
+    }
+    
+    [self sortFacesByAvarageZ:face count:6];
+    
+    CGPoint *points = calloc(5, sizeof(CGPoint));
+    for (int n = 0; n < 6; n++) {
+        ABCDMatrix4x4 projection;
+        ABCDPerspectiveProjectionMatrix(&projection, 1, 20);
         
-        CGPoint tl, tr, bl, br;
-        bl.x = (side[0].x * avarageLength) / side[0].w + CGRectGetWidth(self.bounds) / 2;
-        bl.y = (side[0].y * avarageLength) / side[0].w + CGRectGetHeight(self.bounds) / 2;
+        CGFloat avarageLens = (CGRectGetWidth(self.bounds) + CGRectGetHeight(self.bounds)) / 2;
         
-        tl.x = (side[1].x * avarageLength) / side[1].w + CGRectGetWidth(self.bounds) / 2;
-        tl.y = (side[1].y * avarageLength) / side[1].w + CGRectGetHeight(self.bounds) / 2;
+        ABCDMultiplyMatrixToVector3D(&face[n].bl, &face[n].bl, &projection);
+        points[0].x = face[n].bl.x * avarageLens / face[n].bl.w + CGRectGetWidth(self.bounds) / 2;
+        points[0].y = face[n].bl.y * avarageLens / face[n].bl.w + CGRectGetHeight(self.bounds) / 2;
         
-        tr.x = (side[2].x * avarageLength) / side[2].w + CGRectGetWidth(self.bounds) / 2;
-        tr.y = (side[2].y * avarageLength) / side[2].w + CGRectGetHeight(self.bounds) / 2;
+        ABCDMultiplyMatrixToVector3D(&face[n].tl, &face[n].tl, &projection);
+        points[1].x = face[n].tl.x * avarageLens / face[n].tl.w + CGRectGetWidth(self.bounds) / 2;
+        points[1].y = face[n].tl.y * avarageLens / face[n].tl.w + CGRectGetHeight(self.bounds) / 2;
         
-        br.x = (side[3].x * avarageLength) / side[3].w + CGRectGetWidth(self.bounds) / 2;
-        br.y = (side[3].y * avarageLength) / side[3].w + CGRectGetHeight(self.bounds) / 2;
+        ABCDMultiplyMatrixToVector3D(&face[n].tr, &face[n].tr, &projection);
+        points[2].x = face[n].tr.x * avarageLens / face[n].tr.w + CGRectGetWidth(self.bounds) / 2;
+        points[2].y = face[n].tr.y * avarageLens / face[n].tr.w + CGRectGetHeight(self.bounds) / 2;
         
-        CGPoint *points = calloc(100, sizeof(CGPoint));
-        points[0] = bl;
-        points[1] = tl;
-        points[2] = tr;
-        points[3] = br;
-        points[4] = bl;
+        ABCDMultiplyMatrixToVector3D(&face[n].br, &face[n].br, &projection);
+        points[3].x = face[n].br.x * avarageLens / face[n].br.w + CGRectGetWidth(self.bounds) / 2;
+        points[3].y = face[n].br.y * avarageLens / face[n].br.w + CGRectGetHeight(self.bounds) / 2;
+        
+        points[4] = points[0];
+        points[4] = points[0];
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextAddLines(context, points, 5);
         [[UIColor redColor] setStroke];
-        CGContextSetLineCap(context, kCGLineCapButt);
-        CGContextDrawPath(context, kCGPathStroke);
-        
-        free(side);
-        free(points);
+        switch (face[n].id % 3) {
+            case 0:
+                [[[UIColor blueColor] colorWithAlphaComponent:0.7] setFill];
+                break;
+            case 1:
+                [[[UIColor greenColor] colorWithAlphaComponent:0.7] setFill];
+                break;
+            case 2:
+                [[[UIColor orangeColor] colorWithAlphaComponent:0.7] setFill];
+                break;
+            default:
+                break;
+        }
+        CGContextSetLineWidth(context, 5);
+        CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetLineJoin(context, kCGLineJoinRound);
+        CGContextAddLines(context, points, 5);
+        CGContextDrawPath(context, kCGPathFillStroke);
     }
+    
+    free(face);
+    free(points);
 }
 @end
