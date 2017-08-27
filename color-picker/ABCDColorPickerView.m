@@ -59,31 +59,53 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 }
 
 - (void)drawRect:(CGRect)rect {
-    ABCDTransformation transform;
-    transform.parent = NULL;
-    transform.pivot = (ABCDVector3D){.x = 0, .y = -5, .z = 0, .w = 1};
-    transform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = GLOBAL_ROTATION.z, .w = 1};
-    transform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
-    transform.translation = (ABCDVector3D){.x = 0, .y = 5, .z = 0, .w = 1};
+    ABCDTransformation globalTransform;
+    globalTransform.parent = NULL;
+    globalTransform.pivot = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
+    globalTransform.rotation = (ABCDVector3D){.x = 0, .y = 0, .z = GLOBAL_ROTATION.z, .w = 1};
+    globalTransform.scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
+    globalTransform.translation = (ABCDVector3D){.x = 0, .y = 10, .z = 10, .w = 1};
     
-    ABCDHexagon hexagon;
-    hexagon.transform.scale = (ABCDVector3D){.x = 3, .y = 1, .z = 1, .w = 1};
-    hexagon.transform.translation = (ABCDVector3D){.x = 0, .y = 0, .z = 20, .w = 1};
-    hexagon.transform.rotation = (ABCDVector3D){.x = GLOBAL_ROTATION.x, .y = 0, .z = 0, .w = 1};
-    hexagon.transform.pivot = ABCDVector3DZero;
-    hexagon.transform.parent = &transform;
     
-    ABCDFace *face = calloc(100, sizeof(ABCDFace));
-    size_t cnt;
-    ABCDGetFacesFromHexagon(&face, &cnt, &hexagon);
+    ABCDHexagon *hexagons = calloc(100, sizeof(ABCDHexagon));
+    ABCDFace *face = calloc(200, sizeof(ABCDFace));
+    size_t cnt = 0;
+    
+    for (int n = 0; n < 18; n++) {
+        // TODO: memory leak
+        ABCDTransformation *transform = calloc(1, sizeof(ABCDTransformation));
+        transform->parent = &globalTransform;
+        transform->pivot = (ABCDVector3D){.x = 0, .y = -10, .z = 0, .w = 1};
+        transform->rotation = (ABCDVector3D){.x = 0, .y = 0, .z = (double)n * 20 * M_PI / 180, .w = 1};
+        transform->scale = (ABCDVector3D){.x = 1, .y = 1, .z = 1, .w = 1};
+        transform->translation = ABCDVector3DZero;
+        
+        hexagons[n].transform.scale = (ABCDVector3D){.x = 3.8, .y = 1, .z = 1, .w = 1};
+        hexagons[n].transform.translation = (ABCDVector3D){.x = 0, .y = 0, .z = 0, .w = 1};
+        hexagons[n].transform.rotation = (ABCDVector3D){.x = GLOBAL_ROTATION.x, .y = 0, .z = 0, .w = 1};
+        hexagons[n].transform.pivot = ABCDVector3DZero;
+        hexagons[n].transform.parent = transform;
+        
+        ABCDFace *localFaces = calloc(10, sizeof(ABCDFace));
+        size_t localCnt;
+        ABCDGetFacesFromHexagon(&localFaces, &localCnt, &hexagons[n]);
+        
+        for (size_t i = 0; i < localCnt; i++) {
+            face[cnt + i] = localFaces[i];
+        }
+        
+        cnt += localCnt;
+        free(localFaces);
+    }
+
+    
     [self sortFacesByAvarageZ:face count:cnt];
-    
     CGPoint *points = calloc(5, sizeof(CGPoint));
-    for (int n = 0; n < 6; n++) {
+    for (int n = 0; n < cnt; n++) {
         ABCDMatrix4x4 projection;
         ABCDPerspectiveProjectionMatrix(&projection, 1, 20);
         
-        CGFloat avarageLens = (CGRectGetWidth(self.bounds) + CGRectGetHeight(self.bounds)) / 2;
+        CGFloat avarageLens = MAX(CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds));
         
         ABCDMultiplyMatrixToVector3D(&face[n].bl, &face[n].bl, &projection);
         points[0].x = face[n].bl.x * avarageLens / face[n].bl.w + CGRectGetWidth(self.bounds) / 2;
@@ -128,6 +150,7 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
     
     free(face);
     free(points);
+    free(hexagons);
 }
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
