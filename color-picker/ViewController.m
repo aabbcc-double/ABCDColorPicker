@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ABCDColorPickerView.h"
 
 @interface ViewController ()
 
@@ -23,6 +24,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)colorChanged:(ABCDColorPickerView *)sender {
+    self.view.backgroundColor = sender.currentColor;
+    NSLog(@"Changed");
 }
 
 

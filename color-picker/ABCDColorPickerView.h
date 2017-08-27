@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ABCDColorPickerView : UIControl
-
+@property (copy, nullable, readonly) UIColor *currentColor;
 @end

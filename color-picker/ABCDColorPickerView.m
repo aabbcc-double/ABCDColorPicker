@@ -15,10 +15,16 @@
 
 @interface ABCDColorPickerView () {
     ABCDVector3D overallRotation;
+    UIColor *m_oldColor;
+    UIColor *m_currentColor;
 }
 @end
 
 @implementation ABCDColorPickerView
+- (UIColor *)currentColor {
+    return m_currentColor;
+}
+
 - (void)didMoveToSuperview {
     static NSTimer *timer = nil;
     if (self.superview != nil) {
@@ -151,11 +157,11 @@
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGRect aRect = CGRectMake(0, 0, 10, 10);
+    CGRect aRect = CGRectMake((CGRectGetWidth(self.bounds) - 30) / 2, (CGRectGetHeight(self.bounds) - 30) / 2, 30, 30);
     
     // TODO: needs refactoring
     double h, s, b;
-    double z = fmod(360 - overallRotation.z + 6, 360);
+    double z = fmod(360 - round(overallRotation.z / 12) * 12 + 6, 360);
     while (z < 0) {
         z += 360;
     }
@@ -172,9 +178,19 @@
         b = h > 1 ? x / 5 : MAX((x) / 3.0, 0.2);
     }
     
-    [[UIColor colorWithHue:h saturation:s brightness:b alpha:1] setFill];
+    [[UIColor blackColor] setStroke];
+    CGContextSetLineWidth(context, 3);
+    
+    m_oldColor = m_currentColor;
+    m_currentColor = [UIColor colorWithHue:h saturation:s brightness:b alpha:1];
+    [m_currentColor setFill];
+    
+    if ([m_currentColor isEqual:m_oldColor] == NO) {
+        [self sendActionsForControlEvents:UIControlEventValueChanged];
+    }
+    
     CGContextAddEllipseInRect(context, aRect);
-    CGContextDrawPath(context, kCGPathFill);
+    CGContextDrawPath(context, kCGPathFillStroke);
 
     
     free(face);
