@@ -58,14 +58,13 @@ void ABCDGetFacesFromHexagon(ABCDFace ** dst, size_t *count, const ABCDHexagon *
         
         double coeff = (face[n].bl.y + 1) / 2;
         ABCDMatrix4x4 scaleMatrix;
-        ABCDScaleMatrix(&scaleMatrix, 1 - 0.17 * coeff, 1, 1);
+        ABCDScaleMatrix(&scaleMatrix, 1 - 0.19 * coeff, 1, 1);
         ABCDMultiplyMatrixToVector3D(&face[n].bl, &face[n].bl, &scaleMatrix);
         ABCDMultiplyMatrixToVector3D(&face[n].br, &face[n].br, &scaleMatrix);
         coeff = (face[n].tl.y + 1) / 2;
-        ABCDScaleMatrix(&scaleMatrix, 1 - 0.17 * coeff, 1, 1);
+        ABCDScaleMatrix(&scaleMatrix, 1 - 0.19 * coeff, 1, 1);
         ABCDMultiplyMatrixToVector3D(&face[n].tl, &face[n].tl, &scaleMatrix);
         ABCDMultiplyMatrixToVector3D(&face[n].tr, &face[n].tr, &scaleMatrix);
-
         
         face[n].transform = *hex->transform.parent;
         ABCDCalculateFace(&face[n], &face[n]);
