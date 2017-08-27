@@ -29,7 +29,7 @@ struct ABCDMatrix4x4 {
 
 typedef struct ABCDMatrix4x4 ABCDMatrix4x4;
 
-void ABCDPerspectiveProjectionMatrix(ABCDMatrix4x4 * restrict m, double width, double height, double near, double far);
+void ABCDPerspectiveProjectionMatrix(ABCDMatrix4x4 * restrict m, double near, double far);
 void ABCDRotationXMatrix(ABCDMatrix4x4 * restrict m, double radians);
 void ABCDTranslationMatrix(ABCDMatrix4x4 * restrict m, double tX, double tY, double tZ);
 void ABCDScaleMatrix(ABCDMatrix4x4 * restrict m, double xScale, double yScale, double zScale);

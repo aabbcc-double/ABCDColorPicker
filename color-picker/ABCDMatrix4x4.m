@@ -8,11 +8,9 @@
 
 #import "ABCDMatrix4x4.h"
 
-void ABCDPerspectiveProjectionMatrix(ABCDMatrix4x4 * restrict m, double width, double height, double near, double far) {
+void ABCDPerspectiveProjectionMatrix(ABCDMatrix4x4 * restrict m, double near, double far) {
     double n = near;
     double f = far;
-    double r = width / 2.0;
-    double t = height / 2.0;
     
 //    m->m11 = n / r;
 //    m->m12 = 0.0;
