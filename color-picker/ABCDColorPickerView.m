@@ -29,6 +29,13 @@ static ABCDVector3D GLOBAL_ROTATION = {.x = 0, .y = 0, .z = 0, .w = 1};
 }
 
 - (void)redraw {
+    if ([self isTracking] == NO) {
+//        GLOBAL_ROTATION.x = GLOBAL_ROTATION.x * 180 / M_PI;
+//        GLOBAL_ROTATION.x += (fmod(GLOBAL_ROTATION.x, 60) - GLOBAL_ROTATION.x) / 10;
+        GLOBAL_ROTATION.y += (0 - GLOBAL_ROTATION.y) / 10;
+//        GLOBAL_ROTATION.x = GLOBAL_ROTATION.x * M_PI / 180;
+    }
+    
     [self setNeedsDisplay];
 }
 
