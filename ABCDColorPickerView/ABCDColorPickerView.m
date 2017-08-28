@@ -154,7 +154,7 @@
         points[4] = points[0];
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        [[UIColor grayColor] setStroke];
+//        [[UIColor whiteColor] setStroke];
         
         // TODO: needs refactoring
 
@@ -175,7 +175,7 @@
         CGContextSetLineCap(context, kCGLineCapRound);
         CGContextSetLineJoin(context, kCGLineJoinRound);
         CGContextAddLines(context, points, 5);
-        CGContextDrawPath(context, kCGPathFillStroke);
+        CGContextDrawPath(context, kCGPathFill);
     
     }
     
