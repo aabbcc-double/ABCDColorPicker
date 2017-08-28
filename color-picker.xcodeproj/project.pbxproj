@@ -13,16 +13,19 @@
 		BA71BC451F4ECC94009A7BBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA71BC441F4ECC94009A7BBB /* Assets.xcassets */; };
 		BA71BC481F4ECC94009A7BBB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA71BC461F4ECC94009A7BBB /* LaunchScreen.storyboard */; };
 		BA71BC4B1F4ECC94009A7BBB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC4A1F4ECC94009A7BBB /* main.m */; };
-		BA71BC531F4ECCA7009A7BBB /* ABCDColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */; };
-		BA71BC561F51A6B7009A7BBB /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */; };
-		BA71BC611F51B9F5009A7BBB /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */; };
 		BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC791F51CD34009A7BBB /* matrixTests.m */; };
-		BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */; };
-		BA71BC821F52D5CB009A7BBB /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC811F52D5CB009A7BBB /* ABCDFace.m */; };
-		BA71BC831F52F3F9009A7BBB /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */; };
-		BA71BC841F52F3FE009A7BBB /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC811F52D5CB009A7BBB /* ABCDFace.m */; };
-		BA71BC871F530A9C009A7BBB /* ABCDHexagon.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC861F530A9C009A7BBB /* ABCDHexagon.m */; };
-		BA71BC8A1F535273009A7BBB /* ABCDTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA71BC891F535273009A7BBB /* ABCDTransformation.m */; };
+		BAC918021F541598002F9F80 /* ABCDColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917F71F5414A8002F9F80 /* ABCDColorPickerView.m */; };
+		BAC918031F541598002F9F80 /* ABCDColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917F71F5414A8002F9F80 /* ABCDColorPickerView.m */; };
+		BAC918041F54159B002F9F80 /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FD1F5414A8002F9F80 /* ABCDFace.m */; };
+		BAC918051F54159C002F9F80 /* ABCDFace.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FD1F5414A8002F9F80 /* ABCDFace.m */; };
+		BAC918061F54159F002F9F80 /* ABCDHexagon.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC918011F5414A8002F9F80 /* ABCDHexagon.m */; };
+		BAC918071F5415A0002F9F80 /* ABCDHexagon.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC918011F5414A8002F9F80 /* ABCDHexagon.m */; };
+		BAC918081F5415A7002F9F80 /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FB1F5414A8002F9F80 /* ABCDMatrix4x4.m */; };
+		BAC918091F5415A7002F9F80 /* ABCDTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917F81F5414A8002F9F80 /* ABCDTransformation.m */; };
+		BAC9180A1F5415A7002F9F80 /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FE1F5414A8002F9F80 /* ABCDVector3D.m */; };
+		BAC9180B1F5415A8002F9F80 /* ABCDMatrix4x4.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FB1F5414A8002F9F80 /* ABCDMatrix4x4.m */; };
+		BAC9180C1F5415A8002F9F80 /* ABCDTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917F81F5414A8002F9F80 /* ABCDTransformation.m */; };
+		BAC9180D1F5415A8002F9F80 /* ABCDVector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = BAC917FE1F5414A8002F9F80 /* ABCDVector3D.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,21 +39,21 @@
 		BA71BC471F4ECC94009A7BBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA71BC491F4ECC94009A7BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA71BC4A1F4ECC94009A7BBB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		BA71BC511F4ECCA7009A7BBB /* ABCDColorPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDColorPickerView.h; sourceTree = "<group>"; };
-		BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDColorPickerView.m; sourceTree = "<group>"; };
-		BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDMatrix4x4.m; sourceTree = "<group>"; };
-		BA71BC551F51A6B7009A7BBB /* ABCDMatrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDMatrix4x4.h; sourceTree = "<group>"; };
-		BA71BC5F1F51B9F5009A7BBB /* ABCDVector3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDVector3D.h; sourceTree = "<group>"; };
-		BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDVector3D.m; sourceTree = "<group>"; };
 		BA71BC771F51CD34009A7BBB /* matrixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = matrixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA71BC791F51CD34009A7BBB /* matrixTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = matrixTests.m; sourceTree = "<group>"; };
 		BA71BC7B1F51CD34009A7BBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BA71BC801F52D5CB009A7BBB /* ABCDFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDFace.h; sourceTree = "<group>"; };
-		BA71BC811F52D5CB009A7BBB /* ABCDFace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDFace.m; sourceTree = "<group>"; };
-		BA71BC851F530A9C009A7BBB /* ABCDHexagon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDHexagon.h; sourceTree = "<group>"; };
-		BA71BC861F530A9C009A7BBB /* ABCDHexagon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDHexagon.m; sourceTree = "<group>"; };
-		BA71BC881F535273009A7BBB /* ABCDTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDTransformation.h; sourceTree = "<group>"; };
-		BA71BC891F535273009A7BBB /* ABCDTransformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDTransformation.m; sourceTree = "<group>"; };
+		BAC917F61F5414A8002F9F80 /* ABCDMatrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDMatrix4x4.h; sourceTree = "<group>"; };
+		BAC917F71F5414A8002F9F80 /* ABCDColorPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDColorPickerView.m; sourceTree = "<group>"; };
+		BAC917F81F5414A8002F9F80 /* ABCDTransformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDTransformation.m; sourceTree = "<group>"; };
+		BAC917F91F5414A8002F9F80 /* ABCDHexagon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDHexagon.h; sourceTree = "<group>"; };
+		BAC917FA1F5414A8002F9F80 /* ABCDColorPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDColorPickerView.h; sourceTree = "<group>"; };
+		BAC917FB1F5414A8002F9F80 /* ABCDMatrix4x4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDMatrix4x4.m; sourceTree = "<group>"; };
+		BAC917FC1F5414A8002F9F80 /* ABCDTransformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDTransformation.h; sourceTree = "<group>"; };
+		BAC917FD1F5414A8002F9F80 /* ABCDFace.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDFace.m; sourceTree = "<group>"; };
+		BAC917FE1F5414A8002F9F80 /* ABCDVector3D.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDVector3D.m; sourceTree = "<group>"; };
+		BAC917FF1F5414A8002F9F80 /* ABCDVector3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDVector3D.h; sourceTree = "<group>"; };
+		BAC918001F5414A8002F9F80 /* ABCDFace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCDFace.h; sourceTree = "<group>"; };
+		BAC918011F5414A8002F9F80 /* ABCDHexagon.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCDHexagon.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,7 @@
 		BA71BC2F1F4ECC94009A7BBB = {
 			isa = PBXGroup;
 			children = (
+				BAC917F51F54148D002F9F80 /* ABCDColorPickerView */,
 				BA71BC3A1F4ECC94009A7BBB /* color-picker */,
 				BA71BC781F51CD34009A7BBB /* matrixTests */,
 				BA71BC391F4ECC94009A7BBB /* Products */,
@@ -101,18 +105,6 @@
 				BA71BC461F4ECC94009A7BBB /* LaunchScreen.storyboard */,
 				BA71BC491F4ECC94009A7BBB /* Info.plist */,
 				BA71BC4A1F4ECC94009A7BBB /* main.m */,
-				BA71BC511F4ECCA7009A7BBB /* ABCDColorPickerView.h */,
-				BA71BC521F4ECCA7009A7BBB /* ABCDColorPickerView.m */,
-				BA71BC551F51A6B7009A7BBB /* ABCDMatrix4x4.h */,
-				BA71BC541F51A6B7009A7BBB /* ABCDMatrix4x4.m */,
-				BA71BC5F1F51B9F5009A7BBB /* ABCDVector3D.h */,
-				BA71BC601F51B9F5009A7BBB /* ABCDVector3D.m */,
-				BA71BC801F52D5CB009A7BBB /* ABCDFace.h */,
-				BA71BC811F52D5CB009A7BBB /* ABCDFace.m */,
-				BA71BC851F530A9C009A7BBB /* ABCDHexagon.h */,
-				BA71BC861F530A9C009A7BBB /* ABCDHexagon.m */,
-				BA71BC881F535273009A7BBB /* ABCDTransformation.h */,
-				BA71BC891F535273009A7BBB /* ABCDTransformation.m */,
 			);
 			path = "color-picker";
 			sourceTree = "<group>";
@@ -124,6 +116,25 @@
 				BA71BC7B1F51CD34009A7BBB /* Info.plist */,
 			);
 			path = matrixTests;
+			sourceTree = "<group>";
+		};
+		BAC917F51F54148D002F9F80 /* ABCDColorPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				BAC917FA1F5414A8002F9F80 /* ABCDColorPickerView.h */,
+				BAC917F71F5414A8002F9F80 /* ABCDColorPickerView.m */,
+				BAC918001F5414A8002F9F80 /* ABCDFace.h */,
+				BAC917FD1F5414A8002F9F80 /* ABCDFace.m */,
+				BAC917F91F5414A8002F9F80 /* ABCDHexagon.h */,
+				BAC918011F5414A8002F9F80 /* ABCDHexagon.m */,
+				BAC917F61F5414A8002F9F80 /* ABCDMatrix4x4.h */,
+				BAC917FB1F5414A8002F9F80 /* ABCDMatrix4x4.m */,
+				BAC917FC1F5414A8002F9F80 /* ABCDTransformation.h */,
+				BAC917F81F5414A8002F9F80 /* ABCDTransformation.m */,
+				BAC917FF1F5414A8002F9F80 /* ABCDVector3D.h */,
+				BAC917FE1F5414A8002F9F80 /* ABCDVector3D.m */,
+			);
+			path = ABCDColorPickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,15 +235,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA71BC531F4ECCA7009A7BBB /* ABCDColorPickerView.m in Sources */,
-				BA71BC611F51B9F5009A7BBB /* ABCDVector3D.m in Sources */,
+				BAC918091F5415A7002F9F80 /* ABCDTransformation.m in Sources */,
+				BAC9180A1F5415A7002F9F80 /* ABCDVector3D.m in Sources */,
 				BA71BC401F4ECC94009A7BBB /* ViewController.m in Sources */,
 				BA71BC4B1F4ECC94009A7BBB /* main.m in Sources */,
-				BA71BC8A1F535273009A7BBB /* ABCDTransformation.m in Sources */,
-				BA71BC871F530A9C009A7BBB /* ABCDHexagon.m in Sources */,
+				BAC918081F5415A7002F9F80 /* ABCDMatrix4x4.m in Sources */,
+				BAC918061F54159F002F9F80 /* ABCDHexagon.m in Sources */,
+				BAC918021F541598002F9F80 /* ABCDColorPickerView.m in Sources */,
+				BAC918051F54159C002F9F80 /* ABCDFace.m in Sources */,
 				BA71BC3D1F4ECC94009A7BBB /* AppDelegate.m in Sources */,
-				BA71BC821F52D5CB009A7BBB /* ABCDFace.m in Sources */,
-				BA71BC561F51A6B7009A7BBB /* ABCDMatrix4x4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,10 +251,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAC918071F5415A0002F9F80 /* ABCDHexagon.m in Sources */,
+				BAC918031F541598002F9F80 /* ABCDColorPickerView.m in Sources */,
+				BAC918041F54159B002F9F80 /* ABCDFace.m in Sources */,
 				BA71BC7A1F51CD34009A7BBB /* matrixTests.m in Sources */,
-				BA71BC831F52F3F9009A7BBB /* ABCDVector3D.m in Sources */,
-				BA71BC841F52F3FE009A7BBB /* ABCDFace.m in Sources */,
-				BA71BC7F1F51CD5A009A7BBB /* ABCDMatrix4x4.m in Sources */,
+				BAC9180C1F5415A8002F9F80 /* ABCDTransformation.m in Sources */,
+				BAC9180D1F5415A8002F9F80 /* ABCDVector3D.m in Sources */,
+				BAC9180B1F5415A8002F9F80 /* ABCDMatrix4x4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
