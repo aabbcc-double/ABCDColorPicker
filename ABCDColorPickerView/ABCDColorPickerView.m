@@ -62,7 +62,7 @@
     if ([self isTracking]) {
         return;
     } else {
-        if (MAX(fabs(inertion.x), fabs(inertion.y)) > 0.1) {
+        if (MAX(fabs(inertion.x), fabs(inertion.z)) > 0.1) {
             overallRotation.x += inertion.x;
             overallRotation.z += inertion.z;
             
