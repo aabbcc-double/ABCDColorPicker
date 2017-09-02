@@ -38,6 +38,7 @@
 
 @interface ABCDColorPickerView () {
     ABCDVector3D overallRotation;
+    ABCDVector3D inertion;
     UIColor *m_oldColor;
     UIColor *m_currentColor;
 }
@@ -58,10 +59,19 @@
 }
 
 - (void)redraw {
-    if ([self isTracking] == NO) {
-        
-        overallRotation.x += (round(overallRotation.x / 60) * 60 - overallRotation.x) / 10;
-        overallRotation.z += (round(overallRotation.z / 12) * 12 - overallRotation.z) / 10;
+    if ([self isTracking]) {
+        return;
+    } else {
+        if (MAX(fabs(inertion.x), fabs(inertion.y)) > 0.1) {
+            overallRotation.x += inertion.x;
+            overallRotation.z += inertion.z;
+            
+            inertion.x += (0 - inertion.x) / 10;
+            inertion.z += (0 - inertion.z) / 10;
+        } else {
+            overallRotation.x += (round(overallRotation.x / 60) * 60 - overallRotation.x) / 10;
+            overallRotation.z += (round(overallRotation.z / 12) * 12 - overallRotation.z) / 10;
+        }
     }
     
     [self setNeedsDisplay];
@@ -224,6 +234,8 @@
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     switch (touch.phase) {
         case UITouchPhaseBegan:
+            inertion.x = 0;
+            inertion.z = 0;
             return YES;
         default:
             return NO;
@@ -234,8 +246,12 @@
     CGPoint p = [touch previousLocationInView:self];
     CGPoint pp = [touch locationInView:self];
     
-    overallRotation.x += pp.y - p.y;
-    overallRotation.z += (pp.x - p.x) / 6;
+    inertion.x = pp.y - p.y;
+    inertion.z = (pp.x - p.x) / 6;
+    
+    overallRotation.x += inertion.x;
+    overallRotation.z += inertion.z;
+    [self setNeedsDisplay];
     
     return YES;
 }
