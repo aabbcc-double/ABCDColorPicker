@@ -34,7 +34,8 @@
 
 void ABCDCopyFaceToFace(ABCDFace * restrict dst, const ABCDFace * restrict src) {
     dst->id = src->id;
-    
+    dst->data = src->data;
+
     dst->bl = src->bl;
     dst->tl = src->tl;
     dst->tr = src->tr;
@@ -91,4 +92,21 @@ void ABCDCalculateFace(ABCDFace * restrict dst, const ABCDFace * restrict src) {
     }
     
     ABCDCopyFaceToFace(dst, tmp);
+}
+
+void ABCDSortFacesByAvgZ(ABCDFace * restrict dst, const ABCDFace * restrict src, size_t face_cnt) {
+    // buble sort
+    int swapped;
+    do {
+        swapped = 0;
+        for (int n = 1; n < face_cnt; n++) {
+            if (faces[n - 1].avarageZ < faces[n].avarageZ) {
+                ABCDFace tmp;
+                ABCDCopyFaceToFace(&tmp, &faces[n - 1]);
+                ABCDCopyFaceToFace(&faces[n - 1] , &faces[n]);
+                ABCDCopyFaceToFace(&faces[n], &tmp);
+                swapped = 1;
+            }
+        }
+    } while (swapped == 1);
 }

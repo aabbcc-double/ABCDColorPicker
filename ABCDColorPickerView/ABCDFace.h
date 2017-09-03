@@ -35,6 +35,7 @@
 
 struct ABCDFace {
     uint64_t id;
+    void *data;
     
     ABCDVector3D bl;
     ABCDVector3D tl;
@@ -48,5 +49,8 @@ struct ABCDFace {
 
 typedef struct ABCDFace ABCDFace;
 
+/// Copying data doesnt copy contents of data pointer
 void ABCDCopyFaceToFace(ABCDFace * restrict dst, const ABCDFace * restrict src);
 void ABCDCalculateFace(ABCDFace * restrict dst, const ABCDFace * restrict src);
+/// Uses bubble sort
+void ABCDSortFacesByAvgZ(ABCDFace * restrict dst, const ABCDFace * restrict src, size_t face_cnt);
