@@ -107,7 +107,7 @@ void ABCDSortFacesByAvgZ(ABCDFace * restrict dst, const ABCDFace * restrict src,
         return;
     }
     
-    copyFaceArray(temp_array, src);
+    copyFaceArray(temp_array, src, face_cnt);
     
     // buble sort
     int swapped;
