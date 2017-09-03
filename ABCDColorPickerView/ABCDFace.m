@@ -94,7 +94,21 @@ void ABCDCalculateFace(ABCDFace * restrict dst, const ABCDFace * restrict src) {
     ABCDCopyFaceToFace(dst, tmp);
 }
 
+static void copyFaceArray(ABCDFace * restrict dst, const ABCDFace * restrict src, size_t face_cnt) {
+    for (size_t i = 0; i < face_cnt; i++) {
+        ABCDCopyFaceToFace(&dst[i], &src[i]);
+    }
+}
+
 void ABCDSortFacesByAvgZ(ABCDFace * restrict dst, const ABCDFace * restrict src, size_t face_cnt) {
+    ABCDFace *temp_array = calloc(face_cnt, sizeof(ABCDFace));
+    if (temp_array == NULL) {
+        NSLog(@"Can't allocate temporary memory");
+        return;
+    }
+    
+    copyFaceArray(temp_array, src);
+    
     // buble sort
     int swapped;
     do {
